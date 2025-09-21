@@ -10,4 +10,3 @@ git clone https://github.com/ggerganov/llama.cpp.git
 cd llama.cpp
 make -j$(nproc)
 cd ..
-pip install git+https://github.com/ggerganov/llama.cpp.git
