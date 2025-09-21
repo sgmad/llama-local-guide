@@ -143,5 +143,6 @@ python example_inference.py --model models/llama-2-8b-gptq --prompt "Write a sho
 ---
 
 ## Final thoughts after doing all this:
+# JUST INSTALL LM STUDIO
 
-# BUDDY JUST INSTALL LM STUDIO
+---
