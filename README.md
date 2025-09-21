@@ -139,3 +139,9 @@ python example_inference.py --model models/llama-2-8b-gptq --prompt "Write a sho
 - Fork and open PRs with improved scripts, configs, and reproducible benchmarks.
 - Add notes on specific OS, drivers, and CUDA versions when reporting OOM or performance issues.
 - Prefer small, tested PRs that add value: example config, small script, or benchmark result.
+
+---
+
+## Final thoughts after doing all this:
+
+# BUDDY JUST INSTALL LM STUDIO
