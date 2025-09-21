@@ -3,7 +3,7 @@
 This repository documents a reproducible workflow to run modern open weights locally on a machine with (my exact setup):
 
 - CPU: 32 GB RAM
-- GPU: 6 GB VRAM (consumer card, limited for large models)
+- GPU: 6 GB VRAM
 - OS: Windows 11 Home 24H2 (Build 26100.6584)
 - Goal: run 7B-13B models with quantization and optional GPU offload, and publish the steps so others can reproduce them.
 
