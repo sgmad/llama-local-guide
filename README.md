@@ -28,7 +28,7 @@ This repository documents a reproducible workflow to run modern open weights loc
 - Git
 - Build tools: CMake, make, gcc/clang (for building native code like `llama.cpp`)
 - CUDA toolkit and matching NVIDIA drivers if you plan to use GPU acceleration
-- Sufficient free disk space to store model files (several GB per model)
+- Sufficient free disk space to store model files (several GB per model: LLama-3.1 8B + LLama-3.1 13B = 11.5 GB)
 
 ---
 
@@ -54,10 +54,10 @@ cd text-generation-webui
 
 ## Models tested (so far)
 
-| Model | Params | Typical format | Approx RAM (q4) | VRAM | Notes |
-|---|---:|---|---:|---:|---|
-| LLaMA-2 8B | 8B | GPTQ / GGUF q4 | ~10-12 GB | ~4-6 GB | Might need CPU split on 6 GB cards |
-| LLaMA-2 13B | 13B | GGUF q4 | ~15-18 GB | CPU-only practical | Best on CPU with 32 GB, slower inference |
+| Model          | Params | Typical format  | Approx RAM (q4) | VRAM        | Notes                                |
+|----------------|-------:|-----------------|----------------:|------------:|--------------------------------------|
+| LLaMA-3.1 8B   |     8B | GGUF q4 / GPTQ  | ~10-12 GB       | ~4-6 GB     | Might need CPU split on 6 GB cards   |
+| LLaMA-3.1 13B  |    13B | GGUF q4         | ~15-18 GB       | CPU-only    | Okay on CPU with 32 GB, slower speed |
 
 *Numbers are approximate and vary with quantization, context size, and loader.*
 
@@ -65,10 +65,10 @@ cd text-generation-webui
 
 ## Benchmarks (rough tokens per second)
 
-| Model | Quant | CPU (32 GB) | GPU offload (6 GB) |
-|---|---:|---:|---:|
-| LLaMA-2 8B | GPTQ 4bit | ~4 tok/s | ~10-20 tok/s |
-| LLaMA-2 13B | q4 | ~2-5 tok/s | not practical on 6 GB |
+| Model          | Quant   | CPU (32 GB) | GPU offload (6 GB) |
+|----------------|--------:|------------:|-------------------:|
+| LLaMA-3.1 8B   | q4_0    | ~4-6 tok/s  | ~10-18 tok/s       |
+| LLaMA-3.1 13B  | q4_0    | ~2-4 tok/s  | not practical on 6 GB |
 
 *Benchmarks depend on CPU threads, OS, CUDA, and context length.*
 
@@ -76,11 +76,12 @@ cd text-generation-webui
 
 ## Example commands
 
-### Run a GGUF quantized model with the `llama.cpp` binary
+### Run LLaMA-3.1 8B with llama.cpp
 
 ```bash
-# run binary built from llama.cpp
-./main -m models/mistral-7b-q4_k_m.gguf -p "Summarize the state of local LLMs." -n 128 --threads 8 --ctx_size 2048
+./llama.cpp/main -m models/llama-3.1-8b-q4.gguf -p "Summarize the state of local LLMs." -n 128 --threads 8 --ctx_size 2048
+./llama.cpp/main -m models/llama-3.1-13b-q4.gguf -p "Explain the tradeoffs of running LLaMA models locally." -n 128 --threads 8 --ctx_size 2048
+
 ```
 
 ### Start text-generation-webui
@@ -120,7 +121,8 @@ python example_inference.py --model models/llama-2-8b-gptq --prompt "Write a sho
 ├── scripts/
 │   ├── install.sh
 │   ├── convert_hf_to_gguf.sh
-│   ├── run_mistral.sh
+│   ├── run_llama_8b.sh
+│   ├── run_llama_13b.sh
 │   └── benchmark.py
 ├── configs/
 │   ├── exllama_config.json
