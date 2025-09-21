@@ -4,7 +4,7 @@ This repository documents a reproducible workflow to run modern open weights loc
 
 - CPU: 32 GB RAM
 - GPU: 6 GB VRAM (consumer card, limited for large models)
-- OS: Windows 11 Home Single Language Version 24H2 OS build 26100.6584
+- OS: Windows 11 Home 24H2 (Build 26100.6584)
 - Goal: run 7B-13B models with quantization and optional GPU offload, and publish the steps so others can reproduce them.
 
 ---
